@@ -1,0 +1,3 @@
+[submodule "impl/projects/xyna/src/app/zeta"]
+	path = impl/projects/xyna/src/app/zeta
+	url = https://github.com/Xyna-Factory/xyna-zeta
