@@ -1,0 +1,6 @@
+{
+    "root": true,
+    "extends": [
+        "./projects/xyna/src/app/zeta/lint/config/strict/.eslintrc.json"
+    ]
+}

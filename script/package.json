@@ -1,0 +1,27 @@
+{
+  "name": "new-modeller-devel-tasks",
+  "title": "New Modeller Devel Tasks",
+  "description": "New Modeller Devel Tasks",
+  "version": "0.0.1",
+  "scripts": {
+    "release": "grunt release",
+    "release:de-suffix": "grunt release --lang=de-DE",
+    "release:de": "grunt release --lang=de-DE --suppressLangSuffix",
+    "release:en-suffix": "grunt release --lang=en-US",
+    "release:en": "grunt release --lang=en-US --suppressLangSuffix"
+  },
+  "devDependencies": {
+    "chalk": "^4.1.0",
+    "grunt": "^1.3.0",
+    "grunt-cli": "^1.3.2",
+    "grunt-contrib-clean": "^2.0.0",
+    "grunt-contrib-compress": "^2.0.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-replace": "^2.0.2",
+    "grunt-rsync": "^3.0.0",
+    "load-grunt-tasks": "^5.1.0"
+  },
+  "dependencies": {
+    "typescript": "4.0.5"
+  }
+}

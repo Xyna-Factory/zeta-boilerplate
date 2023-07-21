@@ -1,0 +1,15 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "outDir": "../../out-tsc/app",
+        "module": "es2015",
+        "types": [
+            "resize-observer-browser",
+            "offscreencanvas"
+        ]
+    },
+    "files": [
+        "src/main.ts",
+        "src/polyfills.ts"
+    ]
+}
