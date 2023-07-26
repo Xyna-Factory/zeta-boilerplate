@@ -5,7 +5,7 @@
     "private": true,
     "scripts": {
         "ng": "ng",
-        "start": "ng serve --configuration=en --ssl=true --ssl-key=./ssl/server-public.pem",
+        "start": "ng serve --configuration=development --ssl=true --ssl-key=./ssl/server-public.pem",
         "build": "ng build xyna",
         "release": "ng build xyna --configuration=production --localize --extract-licenses",
         "lint": "eslint --color -c .eslintrc.json --ext .ts ./projects/xyna/src/app",
