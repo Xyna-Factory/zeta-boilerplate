@@ -27,7 +27,7 @@ import { RuntimeContext } from '@zeta/api/xo/xo-describer';
 export const environment: ZetaEnvironment = {
     production: false,
     zeta: {
-        url: 'https://<ip:port>/<api-path>/',
+        url: 'https://factory.xyna.com/XynaBlackEditionWebServices/io/',
         xo: {
             runtimeContext: RuntimeContext.fromWorkspace('default workspace'),
             consistencyCheck: false

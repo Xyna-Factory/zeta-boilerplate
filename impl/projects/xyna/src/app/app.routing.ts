@@ -20,22 +20,22 @@ import { RouteReuseStrategy, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@zeta/auth';
 import { RouteComponentReuseStrategy } from '@zeta/nav';
 import { ZetaRoutes, ZetaRoutingModules, ZetaRoutingProviders } from '@zeta/zeta.routing';
-import { BoilerplateRoutes, BoilerplateRoutingModules, BoilerplateRoutingProviders } from './boilerplate/boilerplate.routing';
+import { MoviesRoutes, MoviesRoutingModules, MoviesRoutingProviders } from './movies/movies.routing';
 
 
 export const AppRoutes: Routes = [
-    { path: '', children: BoilerplateRoutes, canActivate: [AuthGuard] },
+    { path: '', children: MoviesRoutes, canActivate: [AuthGuard] },
     ...ZetaRoutes
 ];
 
 export const AppRoutingModules = [
     RouterModule.forRoot(AppRoutes),
-    ...BoilerplateRoutingModules,
+    ...MoviesRoutingModules,
     ...ZetaRoutingModules
 ];
 
 export const AppRoutingProviders = [
     { provide: RouteReuseStrategy, useClass: RouteComponentReuseStrategy },
-    ...BoilerplateRoutingProviders,
+    ...MoviesRoutingProviders,
     ...ZetaRoutingProviders
 ];

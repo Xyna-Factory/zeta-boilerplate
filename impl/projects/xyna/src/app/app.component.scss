@@ -15,3 +15,6 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
+:host::ng-deep > ng-component {
+    background-color: #111;
+}

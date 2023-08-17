@@ -1,0 +1,48 @@
+@import 'const';
+
+
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .row {
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+        margin: 4px 0 8px 0;
+        padding: 0 4px;
+
+        & > *:not(:last-child) {
+            margin-right: 8px;
+        }
+    }
+
+    ::ng-deep {
+        section {
+            background-color: #111 !important;
+        }
+    
+        header {
+            background-color: #262626 !important;
+            border-bottom: 1px solid #555 !important;
+        }
+
+        mat-label {
+            text-transform: none !important;
+        }
+    }
+
+    .wiki {
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+        padding: 15px;
+        margin-bottom: 200px;
+
+        & > * {
+            margin-bottom: 12px;
+        }
+    }
+    
+}

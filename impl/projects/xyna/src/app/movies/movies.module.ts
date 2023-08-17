@@ -15,33 +15,23 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { RouterModule, Routes } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
-import { BoilerplateModule } from './boilerplate.module';
-import { BoilerplateComponent } from './boilerplate.component';
+import { ZetaModule } from '@zeta/zeta.module';
+import { MoviesComponent } from './movies.component';
 
 
-const root = 'boilerplate';
-
-export const BoilerplateRoutes: Routes = [
-    {
-        path: '',
-        redirectTo: root,
-        pathMatch: 'full'
-    },
-    {
-        path: root,
-        component: BoilerplateComponent,
-        children: [
-            // todo
-        ]
-    }
-];
-
-export const BoilerplateRoutingModules = [
-    RouterModule.forChild(BoilerplateRoutes),
-    BoilerplateModule
-];
-
-export const BoilerplateRoutingProviders = [
-];
+@NgModule({
+    imports: [
+        CommonModule,
+        RouterModule,
+        ZetaModule
+    ],
+    declarations: [
+        MoviesComponent
+    ]
+})
+export class MoviesModule {
+}

@@ -1,0 +1,35 @@
+<div class="row">
+    <xc-form-input [(value)]="searchText" placeholder="search for movies..." xc-form-field-compact></xc-form-input>
+    <xc-button (click)="findMovie()" color="primary">Find</xc-button>
+</div>
+<xc-definition-proxy [xc-base-definition]="definition" [xc-base-definition-data]="data" [xc-definition-observer]="this"></xc-definition-proxy>
+
+<div class="wiki">
+
+<xc-form-input
+    label="Model"
+    [(value)]="vehicleModel"
+    [readonly]="!modelEditable"
+    xc-form-validator-required
+></xc-form-input>
+
+<xc-button
+    (click)="apply()"
+    [busy]="applying"
+    [disabled]="applying"
+>Apply</xc-button>
+
+<xc-checkbox
+    label="Automatic Gearbox"
+    [disabled]="!automaticGearboxAvailable"
+    [(checked)]="automaticGearbox"
+></xc-checkbox>
+
+<xc-form-autocomplete
+    label="Color"
+    placeholder="choose color..."
+    [(xc-form-autocomplete-option)]="color"
+    [xc-form-autocomplete-options]="colors"
+></xc-form-autocomplete>
+
+</div>
