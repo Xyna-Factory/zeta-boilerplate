@@ -16,59 +16,27 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 import { Component } from '@angular/core';
-import { ApiService, RuntimeContext, Xo } from '@zeta/api';
-import { XoMovieTitle } from './movie-title.model';
-import { XoDefinition, XoDefinitionObserver } from '@zeta/xc/xc-form/definitions/xo/base-definition.model';
-import { XcOptionItem } from '@zeta/xc';
+import { environment } from '@environments/environment';
+import { ApiService } from '@zeta/api';
+import { I18nService } from '@zeta/i18n';
+import { XcRemoteTableDataSource } from '@zeta/xc';
 
 
 @Component({
     templateUrl: './movies.component.html',
     styleUrls: ['./movies.component.scss']
 })
-export class MoviesComponent implements XoDefinitionObserver {
-    searchText: '';
-    definition: XoDefinition;
-    data: Xo;
+export class MoviesComponent {
 
-    vehicleModel = 'Mazda';
-    modelEditable = true;
-    applying = false;
+    datasource: XcRemoteTableDataSource;
 
-    apply() {}
-
-    automaticGearboxAvailable = true;
-    automaticGearbox = true;
-
-    color: string;
-    colors: XcOptionItem[] = [{
-        name: 'white',
-        value: '#eee'
-    }, {
-        name: 'black',
-        value: '#111'
-    }, {
-        name: 'red',
-        value: '#c32'
-    }];
-
-
-    constructor(private readonly apiService: ApiService) {
-        setTimeout(() => {
-            this.applying = true;
-        }, 5000);
+    constructor(readonly api: ApiService, readonly i18n: I18nService) {
+        this.datasource = new XcRemoteTableDataSource(api, i18n, environment.zeta.xo.runtimeContext, 'demo.movies.GetMoviesTable');
+        this.refresh();
     }
 
 
-    findMovie() {
-        this.apiService.startOrder(RuntimeContext.fromApplication('MovieDB'), 'xmcp.forms.FindMoviePanel', XoMovieTitle.withTitle(this.searchText)).subscribe(response => {
-            this.definition = response.output[0] as XoDefinition;
-            this.data = response.output[1];
-        });
-    }
-
-
-    translate?(value: string): string {
-        return value;
+    refresh() {
+        this.datasource.refresh();
     }
 }

@@ -29,7 +29,7 @@ export const environment: ZetaEnvironment = {
     zeta: {
         url: 'https://factory.xyna.com/XynaBlackEditionWebServices/io/',
         xo: {
-            runtimeContext: RuntimeContext.fromWorkspace('default workspace'),
+            runtimeContext: RuntimeContext.fromWorkspace('demo'),
             consistencyCheck: false
         },
         auth: {

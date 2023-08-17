@@ -24,7 +24,7 @@ export const environment: ZetaEnvironment = {
     zeta: {
         url: location.origin + '/project-api/',
         xo: {
-            runtimeContext: RuntimeContext.fromApplication('Vacation'),
+            runtimeContext: RuntimeContext.fromApplication('Movie-DB'),
             consistencyCheck: false
         },
         auth: {
