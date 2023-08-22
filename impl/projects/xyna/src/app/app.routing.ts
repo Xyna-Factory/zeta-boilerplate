@@ -21,10 +21,12 @@ import { AuthGuard } from '@zeta/auth';
 import { RouteComponentReuseStrategy } from '@zeta/nav';
 import { ZetaRoutes, ZetaRoutingModules, ZetaRoutingProviders } from '@zeta/zeta.routing';
 import { MoviesRoutes, MoviesRoutingModules, MoviesRoutingProviders } from './movies/movies.routing';
+import { XynaPropertiesComponent } from './xfm/factory-manager/xyna-properties/xyna-properties.component';
 
 
 export const AppRoutes: Routes = [
     { path: '', children: MoviesRoutes, canActivate: [AuthGuard] },
+    { path: 'xyna-properties', component: XynaPropertiesComponent, canActivate: [AuthGuard] },
     ...ZetaRoutes
 ];
 

@@ -21,6 +21,9 @@
         ],
         "paths": {
             "@zeta/*": ["projects/xyna/src/app/zeta/*"],
+            "@fman/*": ["projects/xyna/src/app/xfm/factory-manager/*"],
+            "@pmod/*": ["projects/xyna/src/app/xfm/process-modeller/*"],
+            "@yggdrasil/*": ["projects/xyna/src/app/xfm/yggdrasil/*"],
             "@environments/*": ["projects/xyna/src/environments/*"]
         }
     },

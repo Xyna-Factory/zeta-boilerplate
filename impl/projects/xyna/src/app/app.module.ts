@@ -24,6 +24,8 @@ import { ZetaModule } from '@zeta/zeta.module';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModules, AppRoutingProviders } from './app.routing';
+import { FactoryManagerModule } from '@fman/factory-manager.module';
+import { ProcessmodellerModule } from './xfm/process-modeller/processmodeller.module';
 
 
 @NgModule({
@@ -38,6 +40,8 @@ import { AppRoutingModules, AppRoutingProviders } from './app.routing';
         BrowserAnimationsModule,
         HttpClientModule,
         ZetaModule,
+        ProcessmodellerModule,
+        FactoryManagerModule,
         ...AppRoutingModules
     ],
     providers: [
