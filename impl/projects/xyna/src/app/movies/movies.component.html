@@ -1,13 +1,1 @@
-<xc-panel xc-i18n-context="movies">
-    <header>
-        <h1 xc-i18n>title</h1>
-        <xc-icon-button class="items-right" xc-icon-name="reload" (click)="refresh()" xc-tooltip="{{'refresh-tooltip' | xcI18n}}"></xc-icon-button>
-    </header>
-    <section>
-        <xc-table
-            [xc-table-datasource]="datasource"
-            xc-table-allowfilter
-            xc-table-allowselect
-        ></xc-table>
-    </section>
-</xc-panel>
+<xc-stack [xc-stack-items]="stackDataSource"></xc-stack>

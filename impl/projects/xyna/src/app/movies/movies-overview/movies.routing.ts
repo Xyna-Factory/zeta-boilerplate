@@ -15,27 +15,32 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-
-import { ZetaModule } from '@zeta/zeta.module';
-import { MoviesComponent } from './movies.component';
-import { MoviesOverviewComponent } from './movies-overview/movies-overview.component';
-import { MovieDetailsComponent } from './movie-details/movie-details.component';
+import { RouterModule, Routes } from '@angular/router';
+import { MoviesComponent } from '../movies.component';
+import { MoviesModule } from '../movies.module';
 
 
-@NgModule({
-    imports: [
-        CommonModule,
-        RouterModule,
-        ZetaModule
-    ],
-    declarations: [
-        MoviesComponent,
-        MovieDetailsComponent,
-        MoviesOverviewComponent
-    ]
-})
-export class MoviesModule {
-}
+const root = 'movies';
+
+export const MoviesRoutes: Routes = [
+    {
+        path: '',
+        redirectTo: root,
+        pathMatch: 'full'
+    },
+    {
+        path: root,
+        component: MoviesComponent,
+        children: [
+            // todo
+        ]
+    }
+];
+
+export const MoviesRoutingModules = [
+    RouterModule.forChild(MoviesRoutes),
+    MoviesModule
+];
+
+export const MoviesRoutingProviders = [
+];

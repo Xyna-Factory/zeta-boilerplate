@@ -16,10 +16,12 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 import { Component } from '@angular/core';
-import { environment } from '@environments/environment';
 import { ApiService } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
-import { XcRemoteTableDataSource } from '@zeta/xc';
+import { XcComponentTemplate } from '@zeta/xc';
+import { XcStackDataSource } from '@zeta/xc/xc-stack/xc-stack-data-source';
+import { XcStackItem } from '@zeta/xc/xc-stack/xc-stack-item/xc-stack-item';
+import { MoviesOverviewComponent } from './movies-overview/movies-overview.component';
 
 
 @Component({
@@ -28,15 +30,13 @@ import { XcRemoteTableDataSource } from '@zeta/xc';
 })
 export class MoviesComponent {
 
-    datasource: XcRemoteTableDataSource;
+    stackDataSource: XcStackDataSource;
 
     constructor(readonly api: ApiService, readonly i18n: I18nService) {
-        this.datasource = new XcRemoteTableDataSource(api, i18n, environment.zeta.xo.runtimeContext, 'demo.movies.GetMoviesTable');
-        this.refresh();
-    }
+        this.stackDataSource = new XcStackDataSource();
 
-
-    refresh() {
-        this.datasource.refresh();
+        const overview = new XcStackItem();
+        overview.setTemplate(new XcComponentTemplate(MoviesOverviewComponent, { stackItem: overview }));
+        this.stackDataSource.add(overview);
     }
 }
