@@ -1,3 +1,12 @@
 [submodule "impl/projects/xyna/src/app/zeta"]
 	path = impl/projects/xyna/src/app/zeta
 	url = https://github.com/Xyna-Factory/xyna-zeta
+[submodule "impl/projects/xyna/src/app/xfm/factory-manager"]
+	path = impl/projects/xyna/src/app/xfm/factory-manager
+	url = https://github.com/Xyna-Factory/xyna-factory-manager.git
+[submodule "impl/projects/xyna/src/app/xfm/process-modeller"]
+	path = impl/projects/xyna/src/app/xfm/process-modeller
+	url = https://github.com/Xyna-Factory/xyna-process-modeller.git
+[submodule "impl/projects/xyna/src/app/xfm/yggdrasil"]
+	path = impl/projects/xyna/src/app/xfm/yggdrasil
+	url = https://github.com/Xyna-Factory/xyna-yggdrasil.git
