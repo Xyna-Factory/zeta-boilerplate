@@ -43,7 +43,10 @@
                             "projects/xyna/src/styles.scss"
                         ],
                         "stylePreprocessorOptions": {
-                            "includePaths": ["projects/xyna/src/app"]
+                            "includePaths": [
+                                "projects/xyna/src/app",
+                                "node_modules/@angular/material/theming"
+                            ]
                         },
                         "scripts": []
                     },
