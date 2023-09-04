@@ -43,10 +43,10 @@ function Gruntfile(grunt) {
         pkg: grunt.file.readJSON("package.json"),
 
         //Titel der Anwendung
-        appTitle: "Vacation",
+        appTitle: "Boilerplate",
 
         //Name der WAR-Datei und des Pfades, in den später ein Release deployt wird
-        appName: "vacation",
+        appName: "boilerplate",
 
         //Language Argument
         langSuffix: ((grunt.option("lang") && !grunt.option("suppressLangSuffix")) ? "_" + grunt.option('lang') : ""),
