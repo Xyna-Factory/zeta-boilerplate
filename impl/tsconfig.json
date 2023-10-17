@@ -1,28 +1,33 @@
 {
     "compileOnSave": false,
     "compilerOptions": {
-        "baseUrl": "./",
-        "outDir": "./dist/out-tsc",
-        "sourceMap": true,
-        "declaration": false,
-        "moduleResolution": "node",
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "downlevelIteration": true,
-        "allowSyntheticDefaultImports": true,
-        "target": "es2015",
-        "resolveJsonModule": true,
-        "typeRoots": [
-            "node_modules/@types"
+      "baseUrl": "./",
+      "outDir": "./dist/out-tsc",
+      "sourceMap": true,
+      "declaration": false,
+      "moduleResolution": "node",
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "downlevelIteration": true,
+      "allowSyntheticDefaultImports": true,
+      "target": "ES2022",
+      "resolveJsonModule": true,
+      "useDefineForClassFields": false,
+      "typeRoots": [
+        "node_modules/@types"
+      ],
+      "lib": [
+        "es2018",
+        "dom"
+      ],
+      "paths": {
+        "@zeta/*": [
+          "projects/xyna/src/app/zeta/*"
         ],
-		"lib": [
-            "es2018",
-            "dom"
-        ],
-        "paths": {
-            "@zeta/*": ["projects/xyna/src/app/zeta/*"],
-            "@environments/*": ["projects/xyna/src/environments/*"]
-        }
+        "@environments/*": [
+          "projects/xyna/src/environments/*"
+        ]
+      }
     },
     "angularCompilerOptions": {
         "preserveWhitespaces": false
