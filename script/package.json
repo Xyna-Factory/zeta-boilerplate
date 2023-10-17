@@ -1,7 +1,7 @@
 {
-  "name": "new-modeller-devel-tasks",
-  "title": "New Modeller Devel Tasks",
-  "description": "New Modeller Devel Tasks",
+  "name": "xyna-project-release",
+  "title": "Xyna Project Release",
+  "description": "Release scripts for Xyna Project",
   "version": "0.0.1",
   "scripts": {
     "release": "grunt release",

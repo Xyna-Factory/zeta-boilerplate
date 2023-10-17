@@ -1,13 +1,13 @@
 {
     "name": "xyna",
-    "title": "Xyna Modeller",
+    "title": "My Xyna Project",
     "version": "0.0.1",
     "private": true,
     "scripts": {
         "ng": "ng",
         "start": "ng serve --configuration=development --ssl=true --ssl-key=./ssl/server-public.pem",
-        "build": "ng build xyna",
-        "release": "ng build xyna --configuration=production --localize --extract-licenses",
+        "build": "ng build --configuration=development",
+        "release": "ng build xyna --configuration=production --extract-licenses",
         "lint": "eslint --color -c .eslintrc.json --ext .ts ./projects/xyna/src/app",
         "lint:fix": "npm run lint -- --fix",
         "tsc": "tsc",

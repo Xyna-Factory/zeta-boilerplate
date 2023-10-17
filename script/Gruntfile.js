@@ -45,7 +45,7 @@ function Gruntfile(grunt) {
         //Titel der Anwendung
         appTitle: "Boilerplate",
 
-        //Name der WAR-Datei und des Pfades, in den später ein Release deployt wird
+        // name of the artifact archive
         appName: "boilerplate",
 
         //Language Argument
@@ -63,24 +63,6 @@ function Gruntfile(grunt) {
 
         //Versionsnummer des Releases
         releaseVersion: grunt.option("releaseVersion") || "<%= pkg.version %>",
-
-        //Entwickler-Optionen
-        develOptions: {
-            autoPageReload: false        //Aktiviert das automatische Neuladen der Seite beim Auto-Deploy-Watch-Task
-        },
-        serverConfig: serverConfig,
-        deployment: {
-            host:            "<%= serverConfig.host %>",
-            username:        "<%= serverConfig.username %>",
-            password:        "<%= serverConfig.password %>",
-            warPath:         "<%= serverConfig.warPath' %>",
-            develTargetPath: "<%= serverConfig.develTargetPath %>",
-
-            //Der Task deploy benötigt eine rsync-Implementierung auf dem lokalen System (unter Windows z.B. mittels cygwin)
-            //Falls rsync nicht zur Verfügung steht, mus die folgende Option aktiviert werden. Dabei wird zum Kopieren der
-            //wesentlich langsamere scp-Befehl verwendet.
-            useLegacyDeployment: "<%= serverConfig.useLegacyDeployment %>"
-        },
 
         concat: {
           copyrightHeader: {
@@ -128,9 +110,9 @@ function Gruntfile(grunt) {
 		},
         "baseurl": {
             options: {
-                patterns: [{match: /<base href=\"\/\">/g, replacement: "<base href=\"<%= baseUrl %>\">"}]
+                patterns: [{match: /<base href=\".*\">/g, replacement: "<base href=\"<%= baseUrl %>\">"}]
             },
-            files: [{expand: true, flatten: true, src: ["<%= buildDir %>/../impl/dist/xyna/index.html"], dest: "<%= buildDir %>/../impl/dist/xyna"}]
+            files: [{expand: true, flatten: true, src: ["<%= buildDir %>/../impl/dist/xyna/en-US/index.html"], dest: "<%= buildDir %>/../impl/dist/xyna/en-US"}]
         },
         "baseurl-dev": {
             options: {
@@ -141,54 +123,12 @@ function Gruntfile(grunt) {
     };
 
     config["compress"] = {
-        "build-war": {
+        "build-zip": {
             options: {
                 mode: "zip",
-                archive: "<%= releaseDir %>/<%= appName %><%= langSuffix %>.war",
+                archive: "<%= releaseDir %>/<%= appName %><%= langSuffix %>.zip",
             },
-            files: [{expand: true, cwd: "<%= buildDir %>/../impl/dist/xyna/", src: ["**"]}]
-        }
-    };
-
-    config["rsync"] = {
-        options: {
-            args: ["-a", "--verbose"],
-            exclude: [],
-            recursive: true,
-            deleteAll: true
-        },
-        "deploy-api-doc": {
-            options: {
-                src: "<%= buildDir %>/../api/dist/**",
-                host: "<%= deployment.username %>@<%= deployment.host %>",
-                dest: "<%= deployment.develTargetPath %>/api/"
-            }
-        },
-        "deploy-modeler": {
-            options: {
-                src: "<%= buildDir %>/../impl/dist/xyna/**",
-                host: "<%= deployment.username %>@<%= deployment.host %>",
-                dest: "<%= deployment.develTargetPath %>/impl/"
-            }
-        },
-        "deploy-war": {
-            options: {
-                src: "<%= releaseDir %>/<%= appName %>.war",
-                host: "<%= deployment.username %>@<%= deployment.host %>",
-                dest: "<%= deployment.warPath %>"
-            }
-        }
-    };
-
-    config["watch"] = {
-        autodeploy: {
-            files: ["<%= buildDir %>/../api/dist/**/*.*"],
-            tasks: ["rsync:deploy-api-doc"],
-            options: {
-                spawn: false,
-                livereload: "<%= develOptions.autoPageReload %>",
-                livereloadOnError: false
-            }
+            files: [{expand: true, cwd: "<%= buildDir %>/../impl/dist/xyna/en-US/", src: ["**"]}]
         }
     };
 
@@ -210,7 +150,7 @@ function Gruntfile(grunt) {
     //Test-Tasks
     //----------
 
-    grunt.registerTask("test-modeler", function() {
+    grunt.registerTask("test-xyna-project", function() {
         var exec = require("child_process").exec;
         var cb = this.async();
         exec("npm run lint", {cwd: "../impl"}, function(err, stdout, stderr) {
@@ -245,36 +185,16 @@ function Gruntfile(grunt) {
     grunt.registerTask("add-copyright-header", ["rename-for-concat-copyright", "concat:copyrightHeader", "finish-concat-copyright"]);
 
 
-    grunt.registerTask("default", ["clean:build", "test-modeler", "build-modeler", "replace:baseurl-dev", "replace:title", "add-copyright-header"]);
+    grunt.registerTask("default", ["clean:build", "test-xyna-project", "build-xyna-project", "replace:baseurl-dev", "replace:title", "add-copyright-header"]);
 
     grunt.registerTask("release", [
         "clean:build", "clean:release",
-        "test-modeler", "release-modeler" + (grunt.option("lang") ? "::" + grunt.option('lang') : ""),
-        /*"replace:baseurl", "replace:title",*/ "add-copyright-header", "clean:mocks", "replace:lang",
-        "compress:build-war"
+        "test-xyna-project", "release-xyna-project" + (grunt.option("lang") ? "::" + grunt.option('lang') : ""),
+        "replace:baseurl", "replace:title", "add-copyright-header", "clean:mocks"/*, "replace:lang"*/,
+        "compress:build-zip"
     ]);
 
-    grunt.registerTask("devel-war", [
-        "clean:build", "clean:release",
-        "test-modeler", "build-modeler",
-        "replace:baseurl", "replace:title", "add-copyright-header", "clean:mocks",
-        "compress:build-war"
-    ]);
-
-    grunt.registerTask("build-api-doc", function() {
-        var exec = require("child_process").exec;
-        var cb = this.async();
-        exec("npm run apidoc", {cwd: "../api"}, function(err, stdout, stderr) {
-            console.log(stdout);
-            if (err) {
-                console.error(`exec error: ${err}`);
-                return;
-            }
-            cb();
-        });
-    });
-
-    grunt.registerTask("build-modeler", function() {
+    grunt.registerTask("build-xyna-project", function() {
         var exec = require("child_process").exec;
         var cb = this.async();
         exec("npm run build", {cwd: "../impl"}, function(err, stdout, stderr) {
@@ -288,7 +208,7 @@ function Gruntfile(grunt) {
     });
 
 
-    grunt.registerTask("release-modeler", function(task, lang) {
+    grunt.registerTask("release-xyna-project", function(task, lang) {
         console.log("with args: " + task + ', ' + lang);
         var exec = require("child_process").exec;
         var cb = this.async();
@@ -300,27 +220,6 @@ function Gruntfile(grunt) {
             }
             cb();
         });
-    });
-
-    //Deployment-Tasks:
-    //-----------------
-
-    grunt.registerTask("deploy", ["deploy-api-doc", "rsync:deploy-modeler"]);
-
-    grunt.registerTask("deploy-api-doc", ["rsync:deploy-api-doc"]);
-
-    grunt.registerTask("build-and-deploy", ["default", "deploy"]);
-
-    grunt.registerTask("release-and-deploy", ["release", "deploy-api-doc", "rsync:deploy-war"]);
-
-    //Watch-Tasks:
-    //------------
-
-    //Watch-Task Auto-Deploy: Erzeugt beim Speichern einer Sourcen-Datei (HTML, CSS, JS, etc.) automatisch einen Standard-Build
-    //mit wohlwollender Validierung und kopiert diesen auf einen Application Server
-    grunt.registerTask("autodeploy", () => {
-        grunt.log.writeln("Start watching for changes inside the following files:\n>> " + grunt.config.get("watch.autodeploy.files").join(", "));
-        grunt.task.run("watch:autodeploy");
     });
 
 };
