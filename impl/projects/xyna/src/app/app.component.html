@@ -8,4 +8,4 @@
     [xc-menu-x-position]="menuService.options.xPosition"
     [xc-menu-y-position]="menuService.options.yPosition"
 ></xc-menu>
-<router-outlet></router-outlet>
+<router-outlet *ngIf="visible"></router-outlet>

@@ -16,9 +16,12 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 import { Component, ViewChild } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import { I18nService, LocaleService } from '@zeta/i18n';
 
 import { AppTitleComponent } from '@zeta/nav';
-import { XcMenuComponent } from '@zeta/xc';
+import { XcMenuComponent, XcMenuService } from '@zeta/xc';
 
 
 @Component({
@@ -29,6 +32,25 @@ import { XcMenuComponent } from '@zeta/xc';
 export class AppComponent extends AppTitleComponent {
 
     title = 'Xyna';
+    visible = true;
+
+
+    constructor(
+        router: Router,
+        titleService: Title,
+        readonly menuService: XcMenuService,
+        readonly localeService: LocaleService,
+        readonly i18nService: I18nService
+    ) {
+        super(router, titleService, menuService);
+        i18nService.contextDismantlingSearch = true;
+        localeService.languageChange.subscribe(() => {
+            this.visible = false;
+            setTimeout(() => {
+                this.visible = true;
+            }, 0);
+        });
+    }
 
 
     @ViewChild(XcMenuComponent)
